@@ -1,0 +1,141 @@
+:root {
+    --primary-text: #2D1A1F;
+    --secondary-text: #5A2E36;
+    --background: #F5D5ED;
+    --secondary-bg: #E8C0D9; 
+    --accent-coral: #FF6B6B;
+    --accent-teal: #4ECDC4;
+    --textfield-bg: #FFFFFF;
+    --textfield-border: #FF9B9B;
+  }
+
+* {
+    margin : 0; 
+    padding : 0; 
+    box-sizing: border-box;
+    font-family:Times, serif;
+    color : var(--primary-text)
+}
+
+/* If i want to add a background image 
+body {
+    background-position: center;    
+    overflow: visible; 
+}
+body::before{
+    content: "";
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvb; 
+    background-color: rgb(0, 0, 0, 0.15); 
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px)
+    
+}
+*/
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    margin: 20px;
+    text-align: center;
+    padding: 20px;
+    border: solid var(--accent-coral) ;
+    background-color:var(--textfield-border) ;
+    border-radius: 12px;
+    z-index: 1;
+}
+  
+.chat-header {
+    padding-bottom: 10px;
+}
+
+.chat-container{
+    margin: 30px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid var(--accent-coral);
+    background-color: var(--textfield-border);
+    padding : 30px; 
+    gap: 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    z-index: 1;
+}
+
+.input-container{
+    display: flex;
+    position: relative;
+     
+    width: 350px;
+}
+
+.user-input{
+    width : 100%; 
+    border-radius: 12px;
+    padding: 10px ; 
+    background-color: rgb(0, 0, 0, 0.10);
+    border-color: transparent;
+    padding-right: 35px;
+    font-size: medium;
+    border-color: rgb(253, 255, 250, 0.15);
+    
+}
+
+.user-input:hover{
+    background-color: rgb(250, 250, 250, 0.1);
+}
+
+.user-input:focus{
+    outline : none; 
+}
+
+.user-input::placeholder {
+    color: var(--primary-text);
+}
+
+.sendButton{
+    border: none; 
+    background: transparent; 
+    position: relative;
+    right : 30px; 
+}
+
+.chat-messages{ 
+    width : 700px;
+}
+
+
+.message-content{
+    display: flex;
+    padding-bottom: 20px;
+    gap:10px; 
+}
+
+.user-message{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-bottom: 20px;
+    gap:10px; 
+}
+
+h4{
+    font-weight: lighter;
+    word-break: break-word; /* Standard syntax */
+    -webkit-hyphens: auto; 
+    hyphens: auto; 
+    max-width: 600px; /* Prevent container overflow */
+}
+
+.speaker{
+    width: 90px; 
+    font-size: 18px;
+}

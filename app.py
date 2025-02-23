@@ -16,6 +16,10 @@ chatbot = ChatBot(
     ]
 )
 
+@app.route('/debug-image')
+def debug_image():
+    return app.send_static_file('bg.jpg')
+
 @app.route("/")
 def home():
     return render_template("index.html")

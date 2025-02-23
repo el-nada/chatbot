@@ -1,5 +1,5 @@
-const chatBox = document.getElementById("chat-box");
-const userInputField = document.getElementById("user-input");
+const chatBox = document.querySelector(".chat-messages");
+const userInputField = document.querySelector(".user-input");
 const sendButton = document.querySelector(".sendButton");
 
 sendButton.addEventListener('click', ()=>{
@@ -33,10 +33,9 @@ async function sendMessage() {
 function addUserMessage(userInput){
     chatBox.innerHTML += `
         <div class="user-message">
-            <div class="message-content">
-                You: ${userInput}
+                <h3 class ="speaker">: You</h3>
+                <h4>${userInput}</h4>
             </div>
-        </div>
     `;
 }
 
@@ -51,7 +50,7 @@ function addLoading(){
 }
 
 function removeLoadingIndicator() {
-    const loadingElements = document.getElementsByClassName(LOADING_CLASS);
+    const loadingElements = document.getElementsByClassName("loading");
     if (loadingElements.length > 0) {
         loadingElements[0].remove();
     }
@@ -59,17 +58,16 @@ function removeLoadingIndicator() {
 
 function addBotMessage(message) {
     chatBox.innerHTML += `
-        <div class="bot-message">
-            <div class="message-content">
-                MovieBot: ${message}
-            </div>
+        <div class="message-content">
+            <h3 class ="speaker">MovieBot :</h3>
+            <h4>${message}</h4>
         </div>
     `;
 }
 
 function addErrorMessage(message) {
     chatBox.innerHTML += `
-        <div class="${ERROR_CLASS}">
+        <div class="error-message">
             <div class="message-content">
                 Error: ${message}
             </div>
@@ -81,9 +79,9 @@ function addErrorMessage(message) {
 async function getBotResponse(userInput) {
 
     try {
-        const response = await fetch(API_ENDPOINT, {
+        const response = await fetch("/get_response", {
             method: "POST",
-            headers: REQUEST_HEADERS,
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
             body: `user_input=${encodeURIComponent(userInput)}`
         });
 
