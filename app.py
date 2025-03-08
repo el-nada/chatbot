@@ -6,14 +6,15 @@ app = Flask(__name__)
 # Initialize chatbot (No training)
 chatbot = ChatBot(
     'MovieBot',
-    database_uri="sqlite:///chatbot/data/imdb/database.sqlite3",  # Pre-trained database
+    database_uri="sqlite:///chatbot/data/database.sqlite3",  # Pre-trained database
     logic_adapters=[
         {
             "import_path": "chatterbot.logic.BestMatch",
-            "default_response": "I'm not familiar with this movie.",
-            "maximum_similarity_threshold": 0.90
+            "default_response": "Please ask questions about our store.",
+            "maximum_similarity_threshold": 0.60
         }
-    ]
+    ],
+    read_only=True
 )
 
 @app.route('/debug-image')

@@ -43,7 +43,7 @@ function addLoading(){
     chatBox.innerHTML += `
         <div class="bot-message loading">
             <div class="message-content">
-                MovieBot: Thinking...
+                Bot: Thinking...
             </div>
         </div>
     `;
@@ -59,7 +59,7 @@ function removeLoadingIndicator() {
 function addBotMessage(message) {
     chatBox.innerHTML += `
         <div class="message-content">
-            <h3 class ="speaker">MovieBot :</h3>
+            <h3 class ="speaker">Bot :</h3>
             <h4>${message}</h4>
         </div>
     `;
