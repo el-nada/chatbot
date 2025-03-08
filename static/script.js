@@ -30,23 +30,33 @@ async function sendMessage() {
 
 }
 
-function addUserMessage(userInput){
-    chatBox.innerHTML += `
-        <div class="user-message">
-                <h3 class ="speaker">: You</h3>
-                <h4>${userInput}</h4>
-            </div>
-    `;
+function addUserMessage(userInput) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'message-content'
+    wrapper.className += ' user-message';
+    
+    const message = document.createElement('h4');
+    message.className= 'chat-message'
+    message.className+=' user'
+    message.textContent = userInput;
+    
+    wrapper.appendChild(message);
+    chatBox.appendChild(wrapper);
 }
 
-function addLoading(){
-    chatBox.innerHTML += `
-        <div class="bot-message loading">
-            <div class="message-content">
-                Bot: Thinking...
-            </div>
+function addLoading() {
+    const loader = document.createElement('div');
+    loader.className = 'bot-message loading';
+    loader.innerHTML = `
+      <div class="message-content">
+        <div class="bot">
+          <span class="material-symbols-outlined">robot_2</span>
         </div>
+        <h4 class="chat-message"> Thinking... </h4>
+      </div>
     `;
+    chatBox.appendChild(loader);
+    return loader; // Return reference to loader
 }
 
 function removeLoadingIndicator() {
@@ -57,12 +67,20 @@ function removeLoadingIndicator() {
 }
 
 function addBotMessage(message) {
-    chatBox.innerHTML += `
-        <div class="message-content">
-            <h3 class ="speaker">Bot :</h3>
-            <h4>${message}</h4>
-        </div>
-    `;
+    const container = document.createElement('div');
+    container.className = 'message-content';
+    
+    const botIcon = document.createElement('div');
+    botIcon.className = 'bot';
+    botIcon.innerHTML = `<span class="material-symbols-outlined">robot_2</span>`;
+    
+    const text = document.createElement('h4');
+    text.className ='chat-message'
+    text.textContent = message;
+    
+    container.appendChild(botIcon);
+    container.appendChild(text);
+    chatBox.appendChild(container);
 }
 
 function addErrorMessage(message) {
@@ -77,20 +95,22 @@ function addErrorMessage(message) {
 
 
 async function getBotResponse(userInput) {
-
+    let loader = null;
+    
     try {
-        const response = await fetch("/get_response", {
-            method: "POST",
-            headers: {"Content-Type": "application/x-www-form-urlencoded"},
-            body: `user_input=${encodeURIComponent(userInput)}`
-        });
+        loader = addLoading();
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
 
+        const response = await fetch("/get_response", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: `user_input=${encodeURIComponent(userInput)}`
+        });
         if (!response.ok) {
             throw new Error(`Server error: ${response.status}`);
         }
-
         const data = await response.json();
-        
+
         removeLoadingIndicator();
         
         if (data.response?.trim()) {
@@ -105,9 +125,14 @@ async function getBotResponse(userInput) {
         addErrorMessage(error.message);
 
     } finally {
-
-        chatBox.scrollTop = chatBox.scrollHeight;
-
+        if (loader) removeLoadingIndicator();
+        
+        requestAnimationFrame(() => {
+        chatBox.scrollTo({
+            top: chatBox.scrollHeight,
+            behavior: 'smooth'
+        });
+        });
     }
 }
 

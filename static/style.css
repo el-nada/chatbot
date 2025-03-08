@@ -17,65 +17,42 @@
     color : var(--primary-text)
 }
 
-/* If i want to add a background image 
-body {
-    background-position: center;    
-    overflow: visible; 
-}
-body::before{
-    content: "";
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100dvb; 
-    background-color: rgb(0, 0, 0, 0.15); 
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px)
-    
-}
-*/
-
 body{
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    padding:50px;
+}
+header {
+    display: flex;
+    gap: 20px; 
+    position: relative; /* Pour positionner la barre */
+    align-items: center; /* Alignement vertical */
+    border-bottom: 3px solid #5072A7;
+    width: 100%;
+    padding:15px; 
 }
 
-header {
-    margin: 20px;
-    text-align: center;
-    padding: 20px;
-    border: solid var(--accent-coral) ;
-    background-color:var(--textfield-border) ;
-    border-radius: 12px;
-    z-index: 1;
-}
-  
 .chat-header {
-    padding-bottom: 10px;
+    font-size: 38px;
 }
 
 .chat-container{
-    margin: 30px; 
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid var(--accent-coral);
-    background-color: var(--textfield-border);
-    padding : 30px; 
+    border: solid #5072A7;
+    width: 700px; 
     gap: 20px;
     border-radius: 12px;
     font-size: 18px;
-    z-index: 1;
+    box-shadow: 10px 10px 15px;
 }
 
 .input-container{
     display: flex;
     position: relative;
-     
     width: 350px;
+    margin-bottom: 20px;
 }
 
 .user-input{
@@ -86,12 +63,12 @@ header {
     border-color: transparent;
     padding-right: 35px;
     font-size: medium;
-    border-color: rgb(253, 255, 250, 0.15);
+    border-color: rgb(250, 250, 250, 0.15);
     
 }
 
 .user-input:hover{
-    background-color: rgb(250, 250, 250, 0.1);
+    background-color: rgb(250, 250, 250, 0.25);
 }
 
 .user-input:focus{
@@ -109,32 +86,75 @@ header {
     right : 30px; 
 }
 
-.chat-messages{ 
-    width : 700px;
+
+.chat-messages {
+    width: 700px; 
+    height: 500px; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+    padding: 10px; 
+    border-radius: 8px; 
+    min-height: 500px;
+    max-height: 500px; 
+  }
+  
+.chat-messages::-webkit-scrollbar {
+width: 8px;
 }
 
+.chat-messages::-webkit-scrollbar-track {
+background: rgb(80, 114, 167,0.15);
+border-radius: 4px;
+}
+  
+.chat-messages::-webkit-scrollbar-thumb {
+background: rgb(80, 114, 167, 0.50);
+border-radius: 4px;
+}
 
 .message-content{
     display: flex;
     padding-bottom: 20px;
     gap:10px; 
+    max-width: 800px;
+    padding-right: 20px;
 }
 
 .user-message{
-    display: flex;
     flex-direction: row-reverse;
-    padding-bottom: 20px;
-    gap:10px; 
+    color: white; 
 }
 
-h4{
+.chat-message{
     font-weight: lighter;
+
     word-break: break-word; /* Standard syntax */
     -webkit-hyphens: auto; 
     hyphens: auto; 
     max-width: 600px; /* Prevent container overflow */
+
+    background-color: lightgray;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
 .speaker{
     font-size: 18px;
+}
+
+.bot{
+    border-radius: 50%;
+    width : 40px; 
+    height: 40px;
+    border: solid #5072A7;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.user{
+    background-color: #5072A7;
 }
